@@ -1,0 +1,28 @@
+h1 {
+  text-align: center;
+}
+.input{
+  text-align: center;
+}
+
+.square {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+  font-size: 150px;
+  text-align: center;
+}
+
+.gameboard {
+  display: flex;
+  flex-wrap: wrap;
+  width: 620px;
+  margin: 0 auto;
+}
+.scoreboard{
+  height: 400;
+  width: 605;
+  font-size: 15;
+  display: flex;
+  justify-content: center;
+}
