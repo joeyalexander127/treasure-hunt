@@ -1,4 +1,8 @@
-h1 {
+* {
+  background-color: darkgray;
+}
+
+h1,h3 {
   text-align: center;
 }
 .input{

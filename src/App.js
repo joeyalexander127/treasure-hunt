@@ -19,9 +19,10 @@ const App = () => {
   ])
 
  // state hook for setting random treasure
-  const [treasureLocation, setTreasureLocation] = useState(Math.floor(Math.random()* board.length))
+  const [treasureLocation, setTreasureLocation] = useState(Math.floor(Math.random()* board.length-1))
 // sstate hook for setting bomb location
-  const [bombLocation, setBombLocation] = useState(Math.floor(Math.random()* board.length))
+  const [bombLocation, setBombLocation] = useState(Math.floor(Math.random()* board.length-1))
+  const [gameStatus, setGameStatus] = useState("Keep Searching")
 
 // state hook for current user
 const [user, setUser] = useState("")
@@ -33,13 +34,15 @@ const currentUser = (e) => {
   
   const  handleGamePlay = (index) => {
     let updatedBoard = [...board]
-    if(index === bombLocation){
+    if(index === bombLocation && gameStatus === "Keep Searching"){
       updatedBoard[index] = "💣"
+      setGameStatus("You are dead :( ... reset board to play again")
     setBoard(updatedBoard)
-    }else if(index === treasureLocation){
+    }else if(index === treasureLocation && gameStatus === "Keep Searching"){
       updatedBoard[index] = "💎"
+      setGameStatus("YOU FOUND THE GEM!! Reset board to play again.")
     setBoard(updatedBoard)
-    }else {
+    }else if( gameStatus === "Keep Searching"){
     updatedBoard[index] = "🌴"
     setBoard(updatedBoard)
     }
@@ -47,6 +50,7 @@ const currentUser = (e) => {
 
   const resetState = () => {
     setBoard(board.map((value => "?")))
+    setGameStatus("Keep Searching")
     setTreasureLocation(Math.floor(Math.random()* board.length))
     setBombLocation(Math.floor(Math.random()* board.length))  
   }
@@ -62,6 +66,7 @@ const currentUser = (e) => {
       />
       <User user={user}/>
       </div>
+      <h3>{gameStatus}</h3>
       <div className="gameboard">
         {board.map((value, index) => {
           return(
@@ -77,6 +82,7 @@ const currentUser = (e) => {
         <ResetGame
         reset={resetState}
         />
+        
       </div>
       <div className="scoreboard">
         <h3>scoreboard:</h3>
